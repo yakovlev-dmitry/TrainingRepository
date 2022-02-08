@@ -164,8 +164,8 @@
 		<abtest id="calibrate31" />
 		<abtest id="abLevels2428" />
 		<abtest id="abLevels3740424345_cal" />
-
-
+		<abtest id="abLevels2428_cal" />
+		<abtest id="abEasyOldNew2428" />
 	</ABTests>
 </root>
 <root platform="android_amazon">
