@@ -1,0 +1,929 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>	
+	<ABTests origin="patch">
+	<!-- A/B-ТЕСТЫ 550 -->
+	
+			<!-- Тест на отключение плейблов 1.0 -->
+	<abtest id="550_disable_playables"
+			status="1"
+			rules='{
+				"cond":[{"newplayer":true, "platform":"ios"}],
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_Playables_1.0": "1"}},
+					"test": {"weight": 50, "params": {"AB_Playables_1.0": "2"}}
+				}
+			}'
+	/>
+	
+	<abtest id="m3_colours_lightning_calibration"
+			status="1"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":5, "le":100}}, ["NOT", {"in_ab":["m3_fastlevels_test2"]}]],
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_colours_lightning_calibration"}}
+				}
+			}'
+	/>
+
+	<abtest id="550_boatrace_balance"
+			status="2"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":22}}, ["NOT", {"in_ab":["550_sp_balance"]}]],
+				"join_limit" : 1450000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 33, "params": {"AB_RaceEpisodeRewardsTest": ""}},
+					"test1": {"weight": 33, "params": {"AB_RaceEpisodeRewardsTest": "1"}},
+					"test2": {"weight": 33, "params": {"AB_RaceEpisodeRewardsTest": "2"}}
+				}
+			}'
+	/>	
+
+	<abtest id="550_room_sale"
+			status="1"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":26}}, ["NOT", {"in_ab":["osc_holdout_540"]}]],
+				"join_limit" : 750000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_FloatingHouseSale": ""}},
+					"test": {"weight": 50, "params": {"AB_FloatingHouseSale": "1"}}
+				}			
+			}'
+	/>		
+		
+	<abtest id="550_fc_rewards"
+			status="2"
+			rules='{
+				"cond":[{"platform":"ios"}, {"m3lvl":{"ge":22}}, {"country":["KR","TW","TH","BR","ES","MX","IT","CN","JP","RU","DE","FR"]}, ["NOT", {"in_ab":["season_disabled_540", "m3_fastlevels_test"]}]],
+				"join_limit" : 650000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"test": {"weight": 50, "params": {"AB_FastContest": "1", "AB_FastContest_StartBoosters": "0", "AB_FastContest_Rewards": "0"}},
+					"control": {"weight": 50, "params": {"AB_FastContest": "0"}}
+				}
+			}'
+	/>
+
+	<abtest id="osc_holdout_540"
+			status="2"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":50, "le":500}}, ["NOT", {"in_ab":["cascade_balance_540"]}]],
+				"join_limit" : 1100000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_old_noOSC"}}
+				}
+			}'
+	/>
+
+	<abtest id="boatrace_balance_540"
+			status="0"
+			rules='{
+				"cond":[{"platform":"ios"}, {"m3lvl":{"ge":30}}, ["NOT", {"in_ab":["boat_vs_blimp_races", "season_disabled_540", "new_match3_dynamic_holdout", "m3_fastlevels_test2"]}]],
+				"join_limit" : 800000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 33, "params": {"AB_RaceEpisodeBalanceTest": ""}},
+					"test1": {"weight": 33, "params": {"AB_RaceEpisodeBalanceTest": "1"}},
+					"test2": {"weight": 33, "params": {"AB_RaceEpisodeBalanceTest": "2"}}
+				}
+			}'
+	/>	
+
+	<abtest id="cascade_balance_540"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["prizefair_disabled_540"]}]],
+				"join_limit" : 1635000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_CE_Herbarium21_2": "1"}},
+					"test2": {"weight": 33, "params": {"AB_CE_Herbarium21_2": "2"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_autotune_prunedpw_calibration"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":850, "le":950}}, ["NOT", {"in_ab":["m3_autotune_lightning_newp"]}]],
+				"stay_cond" : {"m3lvl":{"le":951}},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+			       	"control": {"weight": 33, "params": {}},
+					"test_30": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.5", "LevelsFilter" : "3"}},
+					"test_20": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.6", "LevelsFilter" : "3"}}
+				}
+			}'
+	/>
+
+	<abtest id="prizefair_disabled_540"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["expedition_540"]}]],
+				"join_limit" : 900000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_PrizeFestival": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_fastlevels_test2"
+			status="2"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":1, "le":5}}],
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"m3_level": "m3_old_noOSC"}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_fastlevels_test"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_fastlevels_test"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":1, "le":5}}],
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_fastlevels_test"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_osc_calibration"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":80, "le":2000}}, ["NOT", {"in_ab":["m3_colours_calibration", "new_match3_dynamic_holdout", "m3_fastlevels_test2"]}]],
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_osc_calibration"}}
+				}
+			}'
+	/>
+
+	<abtest id="expedition_540"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":34}}, ["NOT", {"in_ab":["exp_softlaunch_530", "exp_softlaunch", "three_boost_choice"]}]],
+				"join_limit" : 950000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_no_expedition": ""}},
+					"test": {"weight": 50, "params": {"AB_no_expedition": "1"}}
+				}
+			}'
+	/>
+	
+		<abtest id="boat_vs_blimp_races"
+			status="0"
+			rules='{
+				"cond":[{"platform":"ios"}, {"m3lvl":{"ge":30}}, ["NOT", {"in_ab":["season_disabled_540", "episoderace_disabled_530", "sticking_boost_choice"]}]],
+				"join_limit" : 891000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 33, "params": {"AB_RaceEpisodeRedesignFirstLaunch": ""}},
+					"test1": {"weight": 33, "params": {"AB_RaceEpisodeRedesignFirstLaunch": "1"}},
+					"test2": {"weight": 33, "params": {"AB_RaceEpisodeRedesignFirstLaunch": "2"}}
+				}
+			}'
+		/>	
+
+	<abtest id="season_disabled_540"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":50}}, ["NOT", {"in_ab":["new_match3_dynamic_holdout", "sticking_boost_choice"]}]],
+				"join_limit" : 370000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_SeasonPass": "1"}},
+					"test": {"weight": 50, "params": {"AB_SeasonPass": "0"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_fastlevels_calibration_201_1000"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":201, "le":1000}}, ["NOT", {"in_ab":["new_match3_dynamic_holdout", "sticking_boost_choice"]}]],
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_fastlevels_calibration4"}}
+				}
+			}'
+	/>
+
+	<abtest id="three_boost_choice"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["sticking_boost_choice", "m3_fastlevels_calibration_201_1000", "m3_colours_calibration", "new_match3_dynamic_holdout", "redesign_sale_tokens"]}]],
+				"join_limit" : 710000,
+				"stay_cond" : {},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+			       	"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_M3StartBoostBatch": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="cascade_disabled_530_2"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["redesign_sale_tokens", "quest_difficulty_olds"]}]],
+				"join_limit" : 1115000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_CE_SweetAdventure": ""}},
+					"test": {"weight": 50, "params": {"AB_CE_SweetAdventure": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="redesign_sale_tokens"
+			status="0"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":226}}, ["NOT", {"in_ab":["quest_difficulty_olds"]}]],
+				"join_limit" : 690000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_Redesign_60s": "1"}},
+					"test": {"weight": 50, "params": {}}
+				}
+			}'
+	/>
+
+	<abtest id="episoderace_disabled_530"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":30, "le":6000}}, ["NOT", {"in_ab":["new_match3_dynamic_holdout", "episoderace_disabled"]}]],
+				"join_limit" : 600000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_RaceEpisode": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_colours_calibration"
+			status="2"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":1080, "le":1140}}],
+				"stay_cond" : {"m3lvl":{"le":1140}},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 25, "params": {}},
+					"test_50": {"weight": 25, "params": {"m3_level": "m3_colours_calibration_50"}},
+					"test_80": {"weight": 25, "params": {"m3_level": "m3_colours_calibration_80"}},
+					"test_100": {"weight": 25, "params": {"m3_level": "m3_colours_calibration_100"}}
+				}
+			}'
+	/>
+
+	<!--  А/Б-тест усложнения баланса квестов -->
+	<abtest id="quest_difficulty_olds"
+				status="0"
+				rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":700, "le":3800}}],
+				"join_limit" : 615000,
+				"stay_cond" : {"m3lvl":{"le":5000}},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+					"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_QuestBalance": "5"}},
+					"test2": {"weight": 33, "params": {"AB_QuestBalance": "6"}}
+				}
+			}'
+    />
+
+	<abtest id="sticking_boost_choice"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":3, "le":11}}],
+				"nodb": true,
+				"stay_cond" : {},
+				"reenterable" : true,				
+				"groups":{
+					"control": {"weight": 33, "params": {"AB_x2StartM3Boosts": "", "AB_SpecialOfferC": "", "AB_M3StartBoostPersistent":""} },
+					"test1": {"weight": 33, "params": {"AB_x2StartM3Boosts": "", "AB_SpecialOfferC": "", "AB_M3StartBoostPersistent":"1"}},
+					"test2": {"weight": 33, "params": {"AB_x2StartM3Boosts": "1", "AB_SpecialOfferC": "1", "AB_M3StartBoostPersistent": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_fastlevels_calibration_201_400"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":201, "le":400}}, ["NOT", {"in_ab":["new_match3_dynamic_holdout", "sticking_boost_choice"]}]],
+				"stay_cond" : {"m3lvl":{"le":400}},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_fastlevels_calibration3"}}
+				}
+			}'
+	/>
+
+	<abtest id="m3_fastlevels_calibration2"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":5, "le":200}}, ["NOT", {"in_ab":["new_match3_dynamic_holdout"]}]],
+				"stay_cond" : {"m3lvl":{"le":200}},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_fastlevels_calibration"}}
+				}
+			}'
+	/>
+
+	<abtest id="beans_disabled_530"
+			status="0"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":20}}, ["NOT", {"in_ab":["exp_softlaunch_530", "sp_bundle_price", "m3_autotune_lightning_newp"]}]],
+				"join_limit" : 930000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_LuckyChestsV3": "1"}}
+				}
+			}'
+	/>
+	
+	<abtest id="new_match3_dynamic_fake2"
+			status="0"
+			rules='{
+				"cond": [{"m3lvl":{"ge":1}}, ["NOT", {"in_ab":["new_match3_dynamic_holdout"]}]],
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+					"control": {"weight": 100, "params": {"AB_Match3_Dynamic": "1"}}
+				}
+			}'
+	/>	
+	
+	<abtest id="m3_autotune_lightning_newp"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":26, "le":50}}],
+				"stay_cond" : {"m3lvl":{"le":1000}},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+			       	"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.4", "LevelsFilter" : "2"}}
+				}
+			}'
+	/>
+	
+	
+	<abtest id="m3_fastlevels_calibration"
+			status="2"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":5, "le":200}}, ["NOT", {"in_ab":["clan_redesign_disabled"]}]],
+				"stay_cond" : {"m3lvl":{"le":200}},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"m3_level": "m3_fastlevels_calibration"}}
+				}
+			}'
+	/>
+	
+	<abtest id="exp_softlaunch_530"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":34}}, ["NOT", {"in_ab":["exp_softlaunch", "cascade_disabled_530", "clan_redesign_disabled"]}]],
+				"join_limit" : 1050000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 33, "params": {"AB_expedition_state": "0"}},
+					"test1": {"weight": 33, "params": {"AB_expedition_state": "1"}},
+					"test2": {"weight": 33, "params": {"AB_expedition_state": "2"}}
+				}
+			}'
+	/>
+	
+	<abtest id="prizefair_disabled_530"
+			status="2"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["clan_redesign_disabled", "new_match3_dynamic_holdout", "idfa_mode"]}]],
+				"join_limit" : 650000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_prize_festival_530": ""}},
+					"test": {"weight": 50, "params": {"AB_prize_festival_530": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="idfa_mode"
+			status="0"
+			rules='{
+				"cond":[{"platform":"ios", "os":["14.5", "14.6", "14.7", "15.0"]}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["clan_redesign_disabled", "episoderace_disabled", "new_match3_dynamic_holdout"]}]],
+				"stay_cond" : {},
+				"join_limit" : 420000,
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_IDFA_Request": ""}},
+					"test": {"weight": 50, "params": {"AB_IDFA_Request": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="cascade_disabled_530"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["clan_redesign_disabled", "sp_bundle_price", "cascade_rewards_holdout"]}]],
+				"join_limit" : 750000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_CE_SweetAdventure": ""}},
+					"test": {"weight": 50, "params": {"AB_CE_SweetAdventure": "1"}}
+				}
+			}'
+	/>
+
+	<abtest id="new_match3_dynamic_holdout"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":50, "le":1000}}, ["NOT", {"in_ab":["clan_redesign_disabled", "episoderace_disabled", "idfa_mode"]}]],
+				"join_limit" : 920000,
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_Match3_Dynamic": "1"}},
+					"test": {"weight": 50, "params": {"AB_Match3_DynamicDisable": "1"}}
+				}
+			}'
+	/>	
+	
+	<abtest id="new_match3_dynamic_fake"
+			status="0"
+			rules='{
+				"cond": [{"m3lvl":{"ge":1}}, ["NOT", {"in_ab":["new_match3_dynamic_holdout"]}]],
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+					"control": {"weight": 100, "params": {"AB_Match3_Dynamic": "1"}}
+				}
+			}'
+	/>	
+		
+	<!-- (530) А/Б тест на сравнение цен бандла Золотого билета -->
+	<abtest id="sp_bundle_price"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":35}}, ["NOT", {"in_ab":["cascade_rewards_holdout", "quests_difficulty_reward"]}]],
+				"join_limit" : 1600000,
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+			       	"test1": {"weight": 25, "params": {"AB_SeasonPassGoldPassPlus": "1"}},
+					"test2": {"weight": 25, "params": {"AB_SeasonPassGoldPassPlus": "2"}},	
+					"test3": {"weight": 25, "params": {"AB_SeasonPassGoldPassPlus": "3"}},					
+					"control": {"weight": 25, "params": {"AB_SeasonPassGoldPassPlus": "0"}}
+				}
+			}'
+	/>	
+		
+	<abtest id="episoderace_disabled"
+			status="2"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":30, "le":6000}}, ["NOT", {"in_ab":["bankgift_holdout_v3", "new_bank_2021"]}]],
+				"join_limit" : 410000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"ABRaceEpisode": "1"}}
+				}
+			}'
+	/>
+	
+	<abtest id="cascade_rewards_holdout"
+			status="2"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["quests_difficulty_reward", "sp9_sale_holdout"]}]],
+				"join_limit" : 1107000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_CE_Herbarium21": "1"}},
+					"test2": {"weight": 33, "params": {"AB_CE_Herbarium21": "2"}}
+				}
+			}'
+	/>
+	
+	<!-- (520) А/Б-тест на запуск купон в банке -->
+	<abtest id="bankgift_holdout_v3"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":15}}, ["NOT", {"in_ab":["new_bank_2021", "room_balance_holdout"]}]],
+				"join_limit" : 600000,
+				"stay_cond" : {},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+					"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_BankGift_v3": "1"}},
+					"test2": {"weight": 33, "params": {"AB_BankGift_v3": "2"}}
+				}
+			}'
+	/>	
+	
+	
+	<!-- (520) А/Б-тест на запуск НМБС -->
+	<abtest id="new_bank_2021"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"newplayer":true}, {"m3lvl":{"ge":1}}],
+				"stay_cond" : {},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+					"control": {"weight": 33, "params": {"AB_OfferStoreBalance": ""}},
+					"test1": {"weight": 33, "params": {"AB_OfferStoreBalance": "1"}},
+					"test2": {"weight": 33, "params": {"AB_OfferStoreBalance": "2"}}
+				}
+			}'
+	/>	
+	
+	<!--  А/Б-тест баланса и сложности в комнате -->
+	<abtest id="room_balance_holdout"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":30}}, ["NOT", {"in_ab":["cascade_rm_holdout", "new_bank_2021", "m3_autotune_lightning_test"]}]],
+				"join_limit" : 630000,
+				"stay_cond" : {},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+			       	"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_RoomBalanceHoldout": "1"}},
+					"test2": {"weight": 33, "params": {"AB_RoomBalanceHoldout": "2"}}
+				}
+			}'
+	/>	
+	
+	<!--  А/Б-тест усложнения баланса квестов -->
+	<abtest id="quests_difficulty_reward"
+				status="0"
+				rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":40, "le":50}}],
+				"join_limit" : 860000,
+				"stay_cond" : {},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+					"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 34, "params": {"AB_QuestBalance": "4"}},
+					"test2": {"weight": 33, "params": {"AB_QuestBalance": "3"}}
+				}
+			}'
+    />
+	
+	<!--  А/Б-тест (holdout) на наличие/отсутствие РМ в КС -->
+	<abtest id="cascade_rm_holdout"
+			status="0"
+			rules='{
+				"cond":[{"platform":"ios"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["new_bank_2021", "m3_autotune_lightning_test", "redesign_x2_sale_holdout"]}]],
+				"join_limit" : 550000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_CE_SweetAdventure_RM_Holdout": ""}},
+					"test": {"weight": 50, "params": {"AB_CE_SweetAdventure_RM_Holdout": "1"}}
+				}
+			}'
+		/>
+	
+	<!--   А/Б-тест двойной скидки в SP9  -->
+	<abtest id="sp9_sale_holdout"
+			status="0"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":15}}, ["NOT", {"in_ab":["quests_difficulty_reward"]}]],
+				"join_limit" : 726000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {"AB_OfferSP9": ""}},
+					"test": {"weight": 50, "params": {"AB_OfferSP9": "1"}}
+				}
+			}'
+		/>
+	
+    <abtest id="m3_autotune_lightning_test"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":26, "le":1000}}, ["NOT", {"in_ab":["redesign_x2_sale_holdout", "sp_bundle_holdout", "cascade_rm_holdout"]}]],
+				"join_limit" : 640000,
+				"stay_cond" : {"m3lvl":{"le":1000}},
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+			       	"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.4", "LevelsFilter" : "1"}},
+					"test2": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.4", "LevelsFilter" : "2"}}
+				}
+			}'
+		/>
+	
+	<!-- Отключаем  по задаче https://app.asana.com/0/0/1200237734335970/f-->
+	<abtest id="redesign_x2_sale_holdout"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":50}}, ["NOT", {"in_ab":["new_bank_2021", "sp_bundle_holdout"]}]],
+				"join_limit" : 400000,
+				"stay_cond" : {},
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+			       	"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_RedesignSale" : "1"}}
+				}
+			}'
+		/>
+	
+	<abtest id="m3_autotune_lightning3"
+			status="2"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":79, "le":140}}, ["NOT", {"in_ab":["m3_autotune_lightning", "m3_autotune_lightning2"]}]],
+				"stay_cond" : {"m3lvl":{"le":140}},
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+			       	"control": {"weight": 33, "params": {}},
+					"test_40": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.3"}},
+					"test_35": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.4"}}
+				}
+			}'
+		/>
+	
+		<abtest id="flower_disabled_holdout"
+			status="0"
+			rules='{
+				"cond": [{"platform":"android_gp"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["beans_burnout_holdout", "disable_competition_holdout"]}]],
+				"join_limit" : 740000,
+				"stay_cond" : {},
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+			       	"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_FlowerEventBonsai": "3"}}
+				}
+			}'
+		/>
+		
+	
+		<abtest id="sp_bundle_holdout"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":35}}, ["NOT", {"in_ab":["so_close_holdout", "exp_softlaunch"]}]],
+				"join_limit" : 600000,
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+			       	"control": {"weight": 33, "params": {"AB_SeasonPassGoldPassPlus": "0"}},
+					"test1": {"weight": 33, "params": {"AB_SeasonPassGoldPassPlus": "1"}},
+					"test2": {"weight": 33, "params": {"AB_SeasonPassGoldPassPlus": "2"}}
+				}
+			}'
+		/>
+		
+		<!-- A/B-ТЕСТЫ 510 -->
+		<abtest id="m3_autotune_lightning2"
+			status="2"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":79, "le":140}}, ["NOT", {"in_ab":["so_close_holdout", "m3_autotune_lightning"]}]],
+				"stay_cond" : {"m3lvl":{"le":140}},
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+			       	"control": {"weight": 33, "params": {}},
+					"test_30": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.1"}},
+					"test_20": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.2"}}
+				}
+			}'
+		/>
+		
+		<!-- (510) А/Б тест. Ускорение динамики в матч3. Итерация 6 -->
+		<abtest id="m3_autotune_lightning"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":79, "le":100}}, ["NOT", {"in_ab":["so_close_holdout"]}]],
+				"stay_cond" : {"m3lvl":{"le":140}},
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+			       	"control": {"weight": 33, "params": {}},
+					"test_30": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.1"}},
+					"test_20": {"weight": 33, "params": {"AB_Match3DifficultyCorrection": "1", "DifficultyCorrectionVersion" : "v3.2"}}
+				}
+			}'
+		/>
+		
+		<abtest id="beans_burnout_holdout"
+			status="0"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":20}}, ["NOT", {"in_ab":["disable_competition_holdout"]}]],
+				"join_limit" : 720000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_LuckyChestsV2": "1"}}
+				}
+			}'
+		/>
+		<!--   А/Б-тест So Close  -->
+		<abtest id="so_close_holdout"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":17}}, ["NOT", {"in_ab":["exp_softlaunch", "new_match3_dynamic_v6"]}]],
+				"stay_cond" : {},
+				"join_limit" : 600000,
+				"nodb": true,
+				"reenterable" : true,
+				"groups":{
+					"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_Match3SoClose": "1", "AB_Match3FieldPreview": "1"}},
+					"test2": {"weight": 33, "params": {"AB_Match3SoClose": "1", "AB_Match3FieldPreview": "1", "AB_OutOfMovesBoosters": "1"}}
+				}
+			}'
+		/>
+
+		<!--   А/Б-тест на отключение соревнований  -->
+		<abtest id="disable_competition_holdout"
+			status="0"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":22}}, ["NOT", {"in_ab":["sp_x2_holdout", "redesign_x2x5_holdout"]}]],
+				"join_limit" : 700000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_DisableContest": "1"}}
+				}
+			}'
+		/>
+		
+		<!--   А/Б-тест на софтлонч экспедиции  -->
+		<abtest id="exp_softlaunch"
+			status="0"
+			rules='{
+				"cond":[{"platform":"ios"}, {"m3lvl":{"ge":34}}, {"country":["KR","TW","BR","TH","ES","MX","IT"]}],
+				"join_limit" : 480000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 33, "params": {}},
+					"test1": {"weight": 33, "params": {"AB_Expedition2SoftLaunch": "1"}},
+					"test2": {"weight": 33, "params": {"AB_Expedition2SoftLaunch": "2"}}
+				}
+			}'
+		/>
+		
+		<!--   А/Б-тест (holdout) на х2/х5 в редизайне комнаты  -->
+		<abtest id="sp_x2_holdout"
+			status="0"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":35}}, ["NOT", {"in_ab":["sp_combo_settings", "quests_difficulty_reward"]}]],
+				"join_limit" : 700000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"SeasonPassX2": "1"}}
+				}
+			}'
+		/>
+		
+		<!--   А/Б-тест (holdout) на х2/х5 в редизайне комнаты  -->
+		<abtest id="redesign_x2x5_holdout"
+			status="0"
+			rules='{
+				"cond":[{"platform":"android_gp"}, {"m3lvl":{"ge":26}}, ["NOT", {"in_ab":["sp_combo_settings"]}]],
+				"join_limit" : 700000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_Castle_Balance5": "1"}}
+				}
+			}'
+		/>
+		
+			<!-- (510) А/Б тест. Ускорение динамики в матч3. Итерация 6 -->
+		<abtest id="new_match3_dynamic_v6"
+			status="0"
+			rules='{
+				"cond": [{"platform":"ios"}, {"m3lvl":{"ge":400, "le":1000}}, ["NOT", {"in_ab":["new_match3_dynamic_v5", "magic_beans_holdout_v2", "redesign_disabled_holdout"]}]],
+				"join_limit" : 550000,
+				"stay_cond" : [{"m3lvl": {"le": 3500}}],
+				"nodb": true,
+				"reenterable" : true,				
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_Match3_Dynamic": "1", "m3_level": "new_match3_dynamic_curve"}}
+				}
+			}'
+		/>
+		
+		<!--   А/Б-тест (holdout) на повторный запуск Гонки на эпизод  -->
+		<abtest id="episoderace_v2_holdout"
+			status="0"
+			rules='{
+				"cond":[{"platform":"ios"}, {"m3lvl":{"ge":30, "le":6000}}, ["NOT", {"in_ab":["magic_beans_holdout_v2", "new_match3_dynamic_v6"]}]],
+				"join_limit" : 400000,
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"control": {"weight": 50, "params": {}},
+					"test": {"weight": 50, "params": {"AB_RaceEpisod": "1"}}
+				}
+			}'
+		/>
+	
+
+
+	<!-- (480)  А/Б-тест на запуск Playable 2.0. -->
+		<abtest id="playable2"
+			status="2"
+			rules='{
+				"cond": [{"platform":"ios"}, {"newplayer":true}, {"lua_call:CanAlternateStart":true}],
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"test": {"weight": 50, "params": {"AB_Playables_2.0": "1"}},
+					"control": {"weight": 50, "params": {"AB_Playables_2.0": "2"}}
+				}
+			}'
+		/>
+
+		<!-- Регулярные тестовые запуски тренировок   -->
+		<abtest id="dog_tr_prelaunch_19"
+			status="1"
+			rules='{
+				"cond":{"payer_type":"nonpayer", "m3lvl":{"ge":100}, "platform":"ios", "country":["PL", "RO", "UA", "IN", "TH", "TR"]},
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"test_release_dog_training_nokng": {"weight": 100, "params": {"AB_DogTraining": "2"}}
+				}
+			}'
+		/>
+		<!-- Регулярная калибровка пака уровней в конце -->
+		<abtest id="testing_level_pack_19"
+			status="1"
+			rules='{
+				"cond": {"platform":"ios", "m3lvl":{"ge":5251}, "country":"TH"},
+				"stay_cond" : {},
+				"nodb": true,
+				"groups":{
+					"testing_level_pack_19": {"weight": 100, "params": {"m3_level": "thai_test_levels"}}
+				}
+			}'
+		/>
+		
+	</ABTests>
+</root>
